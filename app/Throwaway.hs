@@ -72,7 +72,7 @@ take' list n
 
 sumFirstNMultiples' :: Int -> Int
 sumFirstNMultiples' n = 
-    sum' (take' (filter (\i -> i `mod` 3 == 0 || i `mod` 5 == 0) [1..5*n]) n)
+    sum' (take' (filter (\i -> i `mod` 3 == 0 || i `mod` 5 == 0) [1..]) n)
 
 fib :: Int -> Int
 fib n
@@ -80,11 +80,11 @@ fib n
     | n == 1 = 1
     | otherwise = (fib (n-1)) + (fib (n-2))
 
-fibList :: Int -> [Int]
-fibList n = map fib [1..n]
+fibList :: [Int]
+fibList = map fib [1..]
 
 evenFibSum :: Int -> Int
-evenFibSum n = sum' (filter (\i -> i `mod` 2 == 0) (fibList $ n*2))
+evenFibSum n = sum' (take n (filter (\i -> i `mod` 2 == 0) fibList))
 
 prefixLineNumbers :: [String] -> [String]
 prefixLineNumbers lines = map (\(i, s) -> show i ++ ": " ++ s) (zip [1..(length lines)] lines)
